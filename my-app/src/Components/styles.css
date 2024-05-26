@@ -1,5 +1,14 @@
-.aboba{
+.histogram {
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    width: 450px;
+    height: 300px;
+    border: 1px solid #000;
 
-    background-color: azure;
-    color: black;
+}
+
+.bar {
+    width: 50px;
 }

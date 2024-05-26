@@ -5,6 +5,7 @@ import { count, counterRightAnwsers, countEasy, countMedium, countHard } from '.
 import "./styles.css";
 import Results from './Results';
 import loadIcon from '../icons/round_12906744.png';
+import { StyledButton } from './Styled-components/Button';
 
 interface Question {
   type: string;
@@ -29,11 +30,17 @@ export default function Questions() {
   }
 
   const handleAnswerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedOption(event.target.value);
-    setUserAnswers(prevAnswers => [...prevAnswers, event.target.value]);
+    const { value, checked } = event.target;
+    if (checked) {
+      setUserAnswers([value]);
+      setSelectedOption(value);
+    } else {
+      setUserAnswers([]);
+      setSelectedOption('');
+    }
   };
 
-const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;
     if (checked) {
       setUserAnswers(prevAnswers => [...prevAnswers, value]);
@@ -119,14 +126,14 @@ const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   }, []);
 
   return (
-    <div>
+    <div className='Questions'>
       {currentIndex === questions.length && !loading ? <Results/> : <div>
         {!loading ? <div>Вопрос №{results + 1}</div> : ''}
         {!loading && questions.length > 0 && (
-          <div className='aboba'>
+          <div className='custom-width rounded bg-light text-dark p-3 mb-3'>
             <p>{questions[currentIndex].question}</p>
             {questions[currentIndex].type === 'boolean' ?
-              <div>
+              <div className='d-flex flex-column align-items-center'>
                 <input
                   type="radio"
                   id="option1"
@@ -135,7 +142,7 @@ const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
                   checked={selectedOption === 'True'}
                   onChange={handleAnswerChange}
                 />
-                <label htmlFor="option1">True</label>
+                <label className={`custom-check rounded-pill border border-3 mt-4 mt-4 ${selectedOption === 'True'? 'border-info' : 'border-dark'}`} htmlFor="option1">True</label>
                 <input
                   type="radio"
                   id="option2"
@@ -144,22 +151,24 @@ const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
                   checked={selectedOption === 'False'}
                   onChange={handleAnswerChange}
                 />
-                <label htmlFor="option2">False</label>
+                <label className={`custom-check rounded-pill border border-3 mt-4 mt-4 ${selectedOption === 'False'? 'border-info' : 'border-dark'}`} htmlFor="option2">False</label>
               </div> :
               <div>
-                {questions[currentIndex].allAnswers.map((answer: string) => (
-                    <div  key={answer}>
-                    {questions[currentIndex].allRightAnswers.length == 1 ? (<label>
+                {questions[currentIndex].allAnswers.map((answer: string, id: number) => (
+                    <div className='d-flex flex-column align-items-center' key={answer}>
+                    {questions[currentIndex].allRightAnswers.length == 1 ? (
+                    <label
+                     className={`custom-check rounded-pill border border-3 mt-4 mt-4 ${selectedOption === answer ? 'border-info' : 'border-dark'}`}>
                     <input
-                      value={answer}
-                      onChange={handleAnswerChange}
-                      type="radio"
-                    //   checked={selectedOption === answer}
-                    checked={userAnswers.includes(answer)}
+                        value={answer}
+                        onChange={handleAnswerChange}
+                        type="radio"
+                        checked={selectedOption === answer}
                     />
                     {answer}
-                  </label>) : (<label>
+                </label>) : (<label>
                     <input
+                      
                       value={answer}
                       onChange={handleOptionChange}
                       type="checkbox"
@@ -175,10 +184,13 @@ const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
             }
           </div>
         )}
-        {loading ? <p className='rotating'><img className='loading-icon' src={loadIcon} /></p> :
-          <button onClick={() => {
+        {loading ? <div>Загрузка<p className='rotating'><img className='w-50 h-50' src={loadIcon} /></p></div> :
+          <StyledButton
+            id='styledButton'
+           onClick={() => {
             handleNextButtonClick();
             dispatch(count());
+            console.log(userAnswers);
             {questions[currentIndex].type === 'boolean' ? checkTheRightAnswer() : checkTheRightOption(userAnswers,questions[currentIndex].allRightAnswers)}
             
             resseter();
@@ -186,8 +198,8 @@ const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
           }}
             disabled={selectedOption === '' && userAnswers.length === 0}
           >
-            {currentIndex === questions.length - 1 ? 'Закончить' : 'Ответить'}
-          </button>
+            Ответить
+          </StyledButton>
         }
       </div>}
     </div>
