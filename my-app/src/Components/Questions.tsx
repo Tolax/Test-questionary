@@ -40,7 +40,7 @@ const Questions: React.FC = React.memo(() => {
   }, [dispatch]);
 
   const checkTheAnswer = () => {
-    if (selectedOption == fetchedQuestions[currentIndex].correct_answer) {
+    if (selectedOption === fetchedQuestions[currentIndex].correct_answer) {
       if (fetchedQuestions[currentIndex].difficulty === "easy") {
         dispatch(easyCounter());
       }
@@ -58,8 +58,8 @@ const Questions: React.FC = React.memo(() => {
   const resul = useSelector((state: RootState) => state.results);
 
   return (
-    <div className="text-center w-100">
-      {status != "succeeded" ? (
+    <div id="Questions" className="text-center w-100">
+      {status !== "succeeded" ? (
         <div>
           Загрузка
           <p className="rotating">
@@ -69,7 +69,7 @@ const Questions: React.FC = React.memo(() => {
       ) : (
         ""
       )}
-      {currentIndex === fetchedQuestions.length && status == "succeeded" ? (
+      {currentIndex === fetchedQuestions.length && status === "succeeded" ? (
         <Results />
       ) : (
         <div>
