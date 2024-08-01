@@ -2,15 +2,6 @@ input[type="radio"] {
   opacity: 0;
 }
 
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -44,10 +35,17 @@ input[type="radio"] {
   animation: spin linear 3s infinite;
 }
 
-.custom-width {
-  width: 800px;
+.histogram {
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 450px;
+  height: 300px;
+  border: 1px solid #000;
+
 }
 
-.custom-check {
-  width: 400px;
+.bar {
+  width: 50px;
 }

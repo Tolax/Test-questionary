@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledButton = styled.button`
-background-color: ${props => props.disabled ? '#283434' : 'white'};
+background-color: ${props => props.disabled ? 'grey' : 'green'};
 border: none;
 border-radius: 30px;
 color: black;
