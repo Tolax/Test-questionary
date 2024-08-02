@@ -77,7 +77,7 @@ const Questions: React.FC = React.memo(() => {
             currentIndex < fetchedQuestions.length && (
               <div>
                 <div className="fs-2">Вопрос №{resul.current + 1}</div>
-                <div className="rounded bg-light text-dark p-3 mb-3">
+                <div className="rounded  text-dark p-3 mb-3">
                   <p className="fs-3">{fetchedQuestions[currentIndex].question}</p>
                   <div className="d-flex flex-column align-items-center">
                     {fetchedQuestions[currentIndex].allAnswers.map(

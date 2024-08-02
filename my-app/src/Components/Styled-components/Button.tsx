@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledButton = styled.button`
 background-color: ${props => props.disabled ? 'grey' : 'green'};
-border: 2px solid black;
+border: 3px solid black;
 border-radius: 30px;
 color: black;
 padding: 0px 30px;
