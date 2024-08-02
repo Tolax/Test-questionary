@@ -76,14 +76,14 @@ const Questions: React.FC = React.memo(() => {
           {fetchedQuestions.length > 0 &&
             currentIndex < fetchedQuestions.length && (
               <div>
-                <div>Вопрос №{resul.current + 1}</div>
+                <div className="fs-2">Вопрос №{resul.current + 1}</div>
                 <div className="rounded bg-light text-dark p-3 mb-3">
-                  <p>{fetchedQuestions[currentIndex].question}</p>
+                  <p className="fs-3">{fetchedQuestions[currentIndex].question}</p>
                   <div className="d-flex flex-column align-items-center">
                     {fetchedQuestions[currentIndex].allAnswers.map(
                       (item, index) => (
                         <label
-                          className={`w-75 rounded-pill border border-3 mt-4 mt-4 ${
+                          className={`w-75 fs-4 rounded-pill border border-3 mt-4 mt-4 ${
                             selectedOption === item
                               ? "border-info"
                               : "border-dark"

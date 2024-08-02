@@ -10,7 +10,7 @@ const Results: React.FC = () => {
             <div>
                 <h1>Results</h1>
             </div>
-        <div className='d-flex justify-content-around'>
+        <div className='fs-3 d-flex justify-content-around'>
             <div>
                 <p style={{color: 'teal' }}>All questions: {resul.current}</p>
                 <p style={{color: 'purple' }}>Right: {resul.rightAnswers}</p>
